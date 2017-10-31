@@ -12,7 +12,7 @@ ofxWiiMouse::ofxWiiMouse() {
 
   dragButton = 0;
 
-  startThread(true, false);    // blocking, non verbose
+  startThread();    // blocking, non verbose
 }
 
 //--------------------------------------------------------------

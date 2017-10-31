@@ -1,0 +1,3 @@
+[submodule "libs/wiiuse"]
+	path = libs/wiiuse
+	url = git@github.com:almul0/wiiuse.git
