@@ -11,7 +11,7 @@ void ofApp::setup() {
 
   ofBackground(128, 128, 128, 255);
 
-  cursorImage.loadImage("cursor.png");
+  cursorImage.load("cursor.png");
 }
 
 //--------------------------------------------------------------
@@ -84,38 +84,47 @@ void ofApp::wiiMouseConnected(int connected, int found) {
 
 //--------------------------------------------------------------
 void ofApp::wiiMouseMoved(int x, int y) {
-  ofNotifyMouseMoved(x, y);
+    ofMouseEventArgs mouseEventArgs(ofMouseEventArgs::Moved,x,y);
+    ofNotifyEvent(ofEvents().mouseMoved,mouseEventArgs);
 }
 
 //--------------------------------------------------------------
 void ofApp::wiiMouseDragged(int x, int y, int button) {
-  ofNotifyMouseDragged(x, y, button);
+    ofMouseEventArgs mouseEventArgs(ofMouseEventArgs::Dragged,x,y,button);
+    ofNotifyEvent(ofEvents().mouseDragged,mouseEventArgs);
   //ofLog(OF_LOG_VERBOSE, "wiiMouseDragged x: %d, y: %d, button: %d", x, y, button);
 }
 
 //--------------------------------------------------------------
 void ofApp::wiiMousePressed(int x, int y, int button) {
+
   if (button == WIIMOTE_BUTTON_B) {
-    ofNotifyMousePressed(x, y, OF_MOUSE_BUTTON_LEFT);
+      ofMouseEventArgs mouseEventArgs(ofMouseEventArgs::Moved,x,y, OF_MOUSE_BUTTON_LEFT);
+      ofNotifyEvent(ofEvents().mousePressed,mouseEventArgs);
   } else if (button == WIIMOTE_BUTTON_A) {
-    ofNotifyMousePressed(x, y, OF_MOUSE_BUTTON_RIGHT);
+      ofMouseEventArgs mouseEventArgs(ofMouseEventArgs::Moved,x,y, OF_MOUSE_BUTTON_RIGHT);
+      ofNotifyEvent(ofEvents().mousePressed,mouseEventArgs);
   } else  if (button == WIIMOTE_BUTTON_HOME) {
-    ofNotifyMousePressed(x, y, OF_MOUSE_BUTTON_MIDDLE);
+      ofMouseEventArgs mouseEventArgs(ofMouseEventArgs::Moved,x,y, OF_MOUSE_BUTTON_MIDDLE);
+      ofNotifyEvent(ofEvents().mousePressed,mouseEventArgs);
   }
 }
 
 //--------------------------------------------------------------
 void ofApp::wiiMouseReleased(int x, int y, int button) {
-  if (button == WIIMOTE_BUTTON_B) {
-    ofNotifyMouseReleased(x, y, OF_MOUSE_BUTTON_LEFT);
-  } else if (button == WIIMOTE_BUTTON_A) {
-    ofNotifyMouseReleased(x, y, OF_MOUSE_BUTTON_RIGHT);
-  } else  if (button == WIIMOTE_BUTTON_HOME) {
-    ofNotifyMouseReleased(x, y, OF_MOUSE_BUTTON_MIDDLE);
-  }
+    if (button == WIIMOTE_BUTTON_B) {
+        ofMouseEventArgs mouseEventArgs(ofMouseEventArgs::Released, x, y, OF_MOUSE_BUTTON_LEFT);
+        ofNotifyEvent(ofEvents().mousePressed, mouseEventArgs);
+    } else if (button == WIIMOTE_BUTTON_A) {
+        ofMouseEventArgs mouseEventArgs(ofMouseEventArgs::Released, x, y, OF_MOUSE_BUTTON_RIGHT);
+        ofNotifyEvent(ofEvents().mousePressed, mouseEventArgs);
+    } else if (button == WIIMOTE_BUTTON_HOME) {
+        ofMouseEventArgs mouseEventArgs(ofMouseEventArgs::Released, x, y, OF_MOUSE_BUTTON_MIDDLE);
+        ofNotifyEvent(ofEvents().mousePressed, mouseEventArgs);
+    }
 }
-
 //--------------------------------------------------------------
 void ofApp::wiiMouseButtonHeld(int x, int y, int button) {
 }
+
 
