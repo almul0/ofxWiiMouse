@@ -54,8 +54,8 @@ void ofxWiiMouse::threadedFunction() {
         connected = wiiuse_connect(wiiMouse, ONE_WIIMOTE);
         if (connected) {
        		wiiuse_set_ir(wiiMouse[0], 1);
-       		wiiuse_set_ir_vres(wiiMouse[0], ofGetWindowWidth(), ofGetWindowHeight());
-          wmEvent.event = OFXWE_WIIMOTE_CONNECTED;
+            wiiuse_set_aspect_ratio(wiiMouse[0],WIIUSE_ASPECT_4_3);
+            wmEvent.event = OFXWE_WIIMOTE_CONNECTED;
           wmEvent.arg[0] = connected;
           wmEvent.arg[1] = found;
           lock();
@@ -225,4 +225,3 @@ void ofxWiiMouse::wiiMouseDragged(ofxWiiMouseEventArgs & wiiMouseEventArgs) {
 void ofxWiiMouse::wiiMouseReleased(ofxWiiMouseEventArgs & wiiMouseEventArgs) {
   ((ofxWiiMouseApp*)ofGetAppPtr())->wiiMouseReleased(wiiMouseEventArgs.x, wiiMouseEventArgs.y, wiiMouseEventArgs.button);
 }
-
