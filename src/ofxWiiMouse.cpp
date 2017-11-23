@@ -55,6 +55,7 @@ void ofxWiiMouse::threadedFunction() {
         if (connected) {
        		wiiuse_set_ir(wiiMouse[0], 1);
             wiiuse_set_aspect_ratio(wiiMouse[0],WIIUSE_ASPECT_4_3);
+            wiiuse_set_ir_sensitivity(wiiMouse[0],4);
             wmEvent.event = OFXWE_WIIMOTE_CONNECTED;
           wmEvent.arg[0] = connected;
           wmEvent.arg[1] = found;
